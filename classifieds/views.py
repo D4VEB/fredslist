@@ -132,7 +132,7 @@ class ListingCreate(CreateView):
     form_class = ListingForm
     success_url = reverse_lazy("mainpage")
     template_name_suffix = '_create'
-    # pk_url_kwarg = "id"
+    pk_url_kwarg = "id"
 
     def form_valid(self, form):
         """
