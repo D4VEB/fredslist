@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^classifieds/', include("classifieds.urls")),
     url(r'^subcategory/(?P<pk>\d+)/$', SubcategoryView.as_view(), name="subcategory_list"),
     url(r'^category/(?P<pk>\d+)/$', CategoryView.as_view(), name="category_list"),
-    url(r'^mainpage/$', MainPageView.as_view(), name="mainpage"),
+    url(r'^$', MainPageView.as_view(), name="mainpage"),
     url(r'cities/redirect/(?P<id>\d+)/$', CityRedirect.as_view(), name="city_redirect"),
     url(r'^allcities/$', AllCityList.as_view(), name="all_cities"),
     url(r'cities/redirect/(?P<id>\d+)/$', CityRedirect.as_view(),
