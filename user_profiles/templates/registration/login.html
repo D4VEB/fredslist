@@ -1,0 +1,16 @@
+{% extends "classifieds/base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Login to your Fredslist Account{% endblock %}
+
+{% block content %}
+    <h1>Fredslist Login</h1>
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form.as_p }}
+        <input type="submit" name="submit" value="Log in">
+    </form>
+
+{% endblock %}

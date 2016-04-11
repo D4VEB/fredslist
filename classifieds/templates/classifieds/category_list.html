@@ -1,0 +1,60 @@
+{% extends "classifieds/base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+    <h1>{{ category.title }}</h1>
+
+    <div class="btn-group" role="group">
+  <a href="?price=highest"><button type="button" class="btn btn-default">highest price</button></a>
+  <a href="?price=lowest"><button type="button" class="btn btn-default">lowest price</button></a>
+  <a href="?modified=newest"><button type="button" class="btn btn-default">newest item</button></a>
+    <a href="?modified=oldest"><button type="button" class="btn btn-default">oldest item</button></a>
+    </div>
+    <br>
+    <br>
+
+    <div class="btn-group" role="group">
+        <a href="?view=list"><button type="button" class="btn btn-default">list</button></a>
+        <a href="?view=thumb"><button type="button" class="btn btn-default">thumb</button></a>
+        <a href="?view=gallery"><button type="button" class="btn btn-default">gallery</button></a>
+    </div>
+<br>
+    <br>
+<div class="list-group">
+    {% for listing in listings %}
+
+        {% if view == "thumb" or view == "gallery" %}
+            <li  class="list-group-item">
+            {% if listing.image and view == "thumb" %}
+                <img src="{{ listing.image.url }}" height="100" width="100">
+            {% elif listing.image and view == "gallery" %}
+               <div> <img src="{{ listing.image.url }}" height="400" width="400"></div>
+            {% endif %}
+            {{ listing.format_date }}
+            <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
+            {% if listing.price %}
+                ${{ listing.price }}
+            {% endif %}
+             {{ listing.city }}
+                <br>
+            </li>
+
+        {% else %}
+            <li  class="list-group-item">
+            {{ listing.display_date }}
+            <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
+            {% if listing.price %}
+                ${{ listing.price }}
+            {% endif %}
+             {{ listing.city }}
+                <br>
+            </li>
+
+        {% endif %}
+
+    {% endfor %}
+
+</div>
+    {% bootstrap_pagination page_obj %}
+{% endblock %}

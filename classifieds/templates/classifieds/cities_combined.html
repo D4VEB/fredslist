@@ -1,0 +1,10 @@
+{% extends "classifieds/base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<ul>
+{% for city in cities %}
+    <li><a href="{% url 'city_redirect' city.id %}"> {{ city.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "classifieds/base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<h1>{{ profiled_user.username }}</h1>
+
+<ul>
+{% for listing in listings %}
+    <br>
+    <li  class="list-group-item">
+        {{ listing.format_date }}
+        <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
+        {% if listing.listing_price %}
+            ${{ listing.listing_price }}
+        {% endif %}
+         {{ listing.city }}
+            <br>
+    </li>
+    {% if user_match %}
+        <li><a href="{% url 'listing_update' listing.id %}"> update</a></li>
+        <li><a href="{% url 'listing_delete' listing.id %}">delete</a> </li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% endblock %}
