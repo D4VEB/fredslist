@@ -33,7 +33,7 @@ class Listing(models.Model):
     user = models.ForeignKey(User, related_name='listings')
     email = models.EmailField(max_length=300, null=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
-    city = models.ForeignKey(City, null=True)
+    city = models.ForeignKey(City, default='Las Vegas')
     image = models.ImageField(upload_to="listing_images/", null=True, blank=True)
     #TODO: come back to check on this image attribute
 

@@ -43,7 +43,7 @@ def query_sort(get, qs):
     return qs
 
 class ListingMainView(ListView):
-    """
+    """v
     Users will see classifieds from their own city.
     """
     template_name_suffix = '_mainpage'
