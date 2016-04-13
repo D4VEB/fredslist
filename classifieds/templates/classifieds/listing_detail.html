@@ -3,16 +3,15 @@
 
 {% block content%}
 
-<h2>
-{{ listing.title }}
-{{ listing.listing_price }}
-{{ listing.city.city }}
-</h2>
+<h2> {{ listing.title }}</h2>
+<h3>{{ listing.listing_price }}</h3>
+<h3>{{ listing.city.city }}</h3>
+<br>
+<h4> {{ listing.item_description }} </h4>
+
     {% if listing.image %}
-    <img src="{{ listing.image.url }}" height="300" width="300">
+        <img src="{{ listing_images.url }}" height="300" width="300">
     {% endif %}
 
-    <br>
-    <h4> {{ listing.description }} </h4>
 
 {% endblock %}

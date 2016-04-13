@@ -1,18 +1,16 @@
 {% extends "classifieds/base.html" %}
 {% block content%}
 
-    {% if city %}
+    {% if city.city %}
     <h2>Fredslist for buyers/sellers in {{ city }} </h2>
     {% else %}
         <h2>Welcome to Fredslist</h2>
     {% endif %}
 
-
 <div class="container">
   <div class="row">
 
 <div class="col-md-2"></div>
-
   <div class="col-md-6">
   <ul class="list-group">
 {% for category in categories %}
@@ -30,7 +28,7 @@
   </ul>
   </div>
 
-<div class="col-md-4">
+<div class="col-md-2">
 <h1>Other Fredslist Cities</h1>
 <ul class="list-group">
 {% for city in cities %}

@@ -1,10 +1,14 @@
 {% extends "classifieds/base.html" %}
 {% load bootstrap3 %}
 
-{% block title %}{% endblock %}
+{% block title %}User's Listings{% endblock %}
 
 {% block content %}
-<h1>{{ profiled_user.username }}</h1>
+<h1>{{ logged_user.username }}</h1>
+    <h6>User Auth Token: {{ token }}</h6>
+    {% if matched_user %}
+        <a href="?token=new"><button type="button" class="btn btn-default">New Auth Token</button></a>
+    {% endif %}
 
 <ul>
 {% for listing in listings %}
@@ -18,9 +22,9 @@
          {{ listing.city }}
             <br>
     </li>
-    {% if user_match %}
-        <li><a href="{% url 'listing_update' listing.id %}"> update</a></li>
-        <li><a href="{% url 'listing_delete' listing.id %}">delete</a> </li>
+    {% if matched_user %}
+        <li><a href="{% url 'listing_update' listing.id %}"> update this listing</a></li>
+        <li><a href="{% url 'listing_delete' listing.id %}">delete this listing</a> </li>
     {% endif %}
 {% endfor %}
 </ul>

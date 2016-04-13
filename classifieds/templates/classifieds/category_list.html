@@ -5,13 +5,21 @@
 
     <h1>{{ category.title }}</h1>
 
-    <div class="btn-group" role="group">
-  <a href="?price=highest"><button type="button" class="btn btn-default">highest price</button></a>
-  <a href="?price=lowest"><button type="button" class="btn btn-default">lowest price</button></a>
-  <a href="?modified=newest"><button type="button" class="btn btn-default">newest item</button></a>
-    <a href="?modified=oldest"><button type="button" class="btn btn-default">oldest item</button></a>
-    </div>
-    <br>
+    <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="?price=highest">Sorty by price - high to low</a></li>
+    <li><a href="?price=lowest">Sor by price - low to high </a></li>
+    <li><a href="?modified=newest">Sort by age - newest items first</a></li>
+    <li><a href="?modified=oldest">Sort by age - oldest items first</a></li>
+    <li role="separator" class="divider"></li>
+  </ul>
+</div>
+
     <br>
 
     <div class="btn-group" role="group">
@@ -29,7 +37,7 @@
             {% if listing.image and view == "thumb" %}
                 <img src="{{ listing.image.url }}" height="100" width="100">
             {% elif listing.image and view == "gallery" %}
-               <div> <img src="{{ listing.image.url }}" height="400" width="400"></div>
+               <div> <img src="{{ listing.image.url }}" height="500" width="500"></div>
             {% endif %}
             {{ listing.format_date }}
             <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
@@ -44,8 +52,8 @@
             <li  class="list-group-item">
             {{ listing.display_date }}
             <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
-            {% if listing.price %}
-                ${{ listing.price }}
+            {% if listing.listing_price %}
+                ${{ listing.listing_price }}
             {% endif %}
              {{ listing.city }}
                 <br>

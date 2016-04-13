@@ -7,7 +7,6 @@ from classifieds.models import Listing, Category, Subcategory, City
 class ClassifiedsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'item_description', 'listing_price',
                     'subcategory', 'city', 'created_at', 'modified_at')
-
     readonly_fields = ('created_at', 'modified_at')
 
 

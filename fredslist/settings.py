@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'rest_framework',
+    'rest_framework.authtoken',
     'debug_toolbar',
     'bootstrap3',
     'classifieds',
     'user_profiles',
+    'api'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -132,7 +135,6 @@ LOGIN_REDIRECT_URL = reverse_lazy("listing_mainpage")
 # # Static files (CSS, JavaScript, Images)
 # # https://docs.djangoproject.com/en/1.9/howto/static-files/
 #
-STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "global"),
 )
 
@@ -146,6 +148,11 @@ STATIC_URL = '/static/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication')
+    }
 
 # LOGGING = {
 #     'version': 1,
@@ -179,7 +186,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 #         }
 #     },
 #     'loggers': {
-#         'chirps': {
+#         'classifieds': {
 #             'handlers': ['file', 'error_file', 'console'],
 #             'level': 'DEBUG',
 #             'propagate': True

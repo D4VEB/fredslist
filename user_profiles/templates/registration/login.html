@@ -5,7 +5,6 @@
 
 {% block content %}
     <h1>Fredslist Login</h1>
-
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">

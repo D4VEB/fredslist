@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-    <a href="{% url 'mainpage' %}">Return to Home</a>
+    <a href="{% url 'listing_mainpage' %}">Return to Homepage (to see all categories)</a>
 
     {% if user.is_authenticated %}
         <h5>Welcome <a href="{% url 'user_detail' user.id %}"> {{ user.username }}</a></h5>
