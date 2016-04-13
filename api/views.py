@@ -56,6 +56,9 @@ class ListCreateListing(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        #serializer.save(city=self...)
+        # based on conversation with Jeff, David, and Aaron,
+        # this needs to assign a city to the listing
 
     def get_queryset(self):
         qs = super().get_queryset()
