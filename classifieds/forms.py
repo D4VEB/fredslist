@@ -14,3 +14,6 @@ class ListingUpdateForm(forms.ModelForm):
         model = Listing
         fields = ("title", "item_description", "listing_price",
                   "subcategory", "city", "email", "phone_number", "image")
+
+
+# class NewAuthKeyForm(forms.ModelForm):

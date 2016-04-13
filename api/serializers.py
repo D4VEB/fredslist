@@ -5,14 +5,13 @@ from classifieds.models import Listing, Category, Subcategory, City
 
 class UserSerializer(serializers.ModelSerializer):
 
-
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'listing_set')
+        fields = ('id', 'username', 'email', 'listings')
 
 class CitySerializer(serializers.ModelSerializer):
 
-    listing_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    listings = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = City
@@ -28,7 +27,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class SubcategorySerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
-    listing_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    listings = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Subcategory

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.views.generic import View
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -65,3 +66,7 @@ class DetailUpdateDeleteListing(generics.RetrieveUpdateDestroyAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
     permission_classes = (IsOwnerOrReadOnly,)
+
+
+
+

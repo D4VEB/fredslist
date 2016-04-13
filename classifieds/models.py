@@ -30,7 +30,7 @@ class Listing(models.Model):
     listing_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
      # I'm sure there's a better way to show currency, but I didn't spend time on it now
     subcategory = models.ForeignKey(Subcategory, null=True)
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.ForeignKey(User, related_name='listings')
     email = models.EmailField(max_length=300, null=True)
     phone_number = models.CharField(max_length=10, null=True, blank=True)
     city = models.ForeignKey(City, null=True)

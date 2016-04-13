@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'bootstrap3',
     'classifieds',
     'user_profiles',
-    'api'
+    'api',
+    'rest_framework_swagger',
+    'corsheaders'
+
 ]
 
 MIDDLEWARE_CLASSES = [

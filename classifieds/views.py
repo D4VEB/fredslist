@@ -1,12 +1,14 @@
+import stripe as stripe
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, \
-    UpdateView, DeleteView, CreateView, RedirectView
+    UpdateView, DeleteView, CreateView, RedirectView, View
+from rest_framework import request
+
 from classifieds.models import Listing, Category, Subcategory, City
 from classifieds.forms import ListingForm, ListingUpdateForm
-from django.views.generic.edit import FormMixin
 from rest_framework.authtoken.models import Token
 
 
@@ -189,12 +191,39 @@ class UserDetail(ListView):
         context["matched_user"] = self.request.user == logged_user
         return context
 
-        current_token = Token.objects.filter(user=logged_user)[0]
-        context["token"] = current_token
+        new_token = Token.objects.filter(user=logged_user)[0]
+        context["token"] = new_token
 
         generated_token = self.request.GET.get("token")
         if generated_token == "new":
-            current_token.delete()
+            new_token.delete()
         context["token"] = Token.objects.create(user=logged_user)
 
         return context
+
+class StripeSubmit(View):
+
+    def post(self):
+        token = request.POST['stripeToken']
+
+        stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
+
+        # Create a Customer
+        customer = stripe.Customer.create(source=token,
+                                          description="Example customer")
+
+        # Charge the Customer instead of the card
+        stripe.Charge.create(
+            amount=1000,  # in cents
+            currency="usd",
+            customer=customer.id
+        )
+
+        # YOUR CODE: Save the customer ID and other info in a database for later!
+        # YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
+
+        stripe.Charge.create(
+            amount=1500,  # $15.00 this time
+            currency="usd",
+            customer=customer_id  # Previously stored, then retrieved
+        )

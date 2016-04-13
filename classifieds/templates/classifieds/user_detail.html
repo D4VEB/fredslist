@@ -7,7 +7,7 @@
 <h1>{{ logged_user.username }}</h1>
     <h6>User Auth Token: {{ token }}</h6>
     {% if matched_user %}
-        <a href="?token=new"><button type="button" class="btn btn-default">New Auth Token</button></a>
+        <a href="?token=new"><button type="button" class="btn btn-default">Generate New Auth Token</button></a>
     {% endif %}
 
 <ul>
@@ -23,8 +23,8 @@
             <br>
     </li>
     {% if matched_user %}
-        <li><a href="{% url 'listing_update' listing.id %}"> update this listing</a></li>
-        <li><a href="{% url 'listing_delete' listing.id %}">delete this listing</a> </li>
+        <li><a href="{% url 'listing_update' listing.id %}"> Update this listing</a></li>
+        <li><a href="{% url 'listing_delete' listing.id %}">Delete this listing</a> </li>
     {% endif %}
 {% endfor %}
 </ul>
