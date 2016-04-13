@@ -1,6 +1,7 @@
 from django.contrib import admin
-
 # Register your models here.
+from gunicorn.config import User
+
 from classifieds.models import Listing, Category, Subcategory, City
 
 @admin.register(Listing)
@@ -23,3 +24,4 @@ class SubcategoryAdmin(admin.ModelAdmin):
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('id', 'city')
+

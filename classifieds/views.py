@@ -42,7 +42,7 @@ def query_sort(get, qs):
 
     return qs
 
-class MainPageView(ListView):
+class ListingMainView(ListView):
     """
     Users will see classifieds from their own city.
     """
@@ -57,7 +57,7 @@ class MainPageView(ListView):
         city = get_city(self.request)
 
         if city:
-            context["city"] = city
+            context["city_city"] = city.city
 
         context["cities"] = City.objects.all()
         return context
@@ -154,11 +154,14 @@ class ListingDelete(DeleteView):
     template_name_suffix = "_delete"
     success_url = reverse_lazy("listing_mainpage")
 
+# class CityList(ListView):
+#     model = City
+#     queryset = City.objects.order_by('city')
+
 class CitiesCombinedList(ListView):
     model = City
     context_object_name = "cities"
     template_name = "classifieds/cities_combined.html"
-
 
 class CityRedirect(RedirectView):
     pattern_name = "city_redirect"
@@ -168,8 +171,8 @@ class CityRedirect(RedirectView):
         destination_city = get_object_or_404(City, pk=self.kwargs["id"])
         self.request.session["city_id"] = destination_city.id
         if self.request.user.pk:
-            self.request.user.profile.city = destination_city
-            self.request.user.profile.save()
+            self.request.user.user_profile.city = destination_city
+            self.request.user.user_profile.save()
         return reverse("listing_mainpage")
 
 
@@ -197,7 +200,7 @@ class UserDetail(ListView):
         generated_token = self.request.GET.get("token")
         if generated_token == "new":
             new_token.delete()
-        context["token"] = Token.objects.create(user=logged_user)
+        context["token"] = Token.objects.create(user=logged_user)[0]
 
         return context
 
