@@ -25,7 +25,7 @@
         <h3><a href="{% url 'register' %}">Register as a new Fredslist user</a> </h3>
         <h4><a href="{% url 'login' %}">Login to Fredslist as a returning user</a> </h4>
     {% endif %}
-    <h4><a href="{% url 'listing_create' %}">
+    <h4><a href="{% url 'classifieds:listing_create' %}">
         Add a listing to sell something on Fredslist</a> </h4>
 
     {% block content %}

@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from classifieds.views import ListingDetail, ListingCreate, \
-    ListingUpdate, ListingDelete, StripeSubmit
+    ListingUpdate, ListingDelete
 
 urlpatterns = [
     url(r'^(?P<pk>\d+)/$', ListingDetail.as_view(),
@@ -11,6 +11,4 @@ urlpatterns = [
         name="listing_update"),
     url(r'^delete/(?P<pk>\d+)/$',ListingDelete.as_view(),
         name="listing_delete"),
-    url(r'^listing-donate/$', StripeSubmit,
-        name = 'chirp_donate')
     ]

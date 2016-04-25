@@ -25,13 +25,15 @@ from classifieds.views import CategoryView, SubcategoryView, ListingMainView, \
 from user_profiles.views import RegisteredUser
 
 urlpatterns = [
+    url(r'^accounts/', include('allauth.urls')),
     url('^', include('django.contrib.auth.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^classifieds/', include("classifieds.urls")),
     url(r'^users/register/$', RegisteredUser.as_view(), name="register"),
     url(r'^users/detail/(?P<pk>\d+)/$', UserDetail.as_view(),
         name="user_detail"),
-    url(r'^classifieds/', include("classifieds.urls")),
+    # Add namespacing to your urls for each app
+    # made corresponding changes to HTML in templates
+    url(r'^classifieds/', include("classifieds.urls", namespace='classifieds')),
     url(r'^subcategory/(?P<pk>\d+)/$', SubcategoryView.as_view(),
         name="subcategory_list"),
     url(r'^category/(?P<pk>\d+)/$', CategoryView.as_view(),

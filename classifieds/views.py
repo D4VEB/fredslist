@@ -204,29 +204,3 @@ class UserDetail(ListView):
 
         return context
 
-class StripeSubmit(View):
-
-    def post(self):
-        token = request.POST['stripeToken']
-
-        stripe.api_key = "sk_test_BQokikJOvBiI2HlWgH4olfQ2"
-
-        # Create a Customer
-        customer = stripe.Customer.create(source=token,
-                                          description="Example customer")
-
-        # Charge the Customer instead of the card
-        stripe.Charge.create(
-            amount=1000,  # in cents
-            currency="usd",
-            customer=customer.id
-        )
-
-        # YOUR CODE: Save the customer ID and other info in a database for later!
-        # YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
-
-        stripe.Charge.create(
-            amount=1500,  # $15.00 this time
-            currency="usd",
-            customer=customer_id  # Previously stored, then retrieved
-        )

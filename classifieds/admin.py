@@ -1,14 +1,22 @@
 from django.contrib import admin
-# Register your models here.
-from gunicorn.config import User
-
 from classifieds.models import Listing, Category, Subcategory, City
 
 @admin.register(Listing)
-class ClassifiedsAdmin(admin.ModelAdmin):
+class ListingAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'item_description', 'listing_price',
                     'subcategory', 'city', 'created_at', 'modified_at')
     readonly_fields = ('created_at', 'modified_at')
+    # Add filters for posts for date and city
+    list_filter = ['created_at', 'city']
+    # Add a search function on the admin that will search through all ads
+    search_fields = ['title', 'item_description']
+
+    # Add a custom action for the ads that will allow multiple to be archived
+    actions = ['archive_listings']
+
+    def archive_listings(self, request, queryset):
+        queryset.update(archived=True)
+    archive_listings.short_description = "Archive Listings"
 
 
 @admin.register(Category)

@@ -15,7 +15,7 @@
     <br>
     <li  class="list-group-item">
         {{ listing.format_date }}
-        <a href="{% url 'listing_detail' listing.id %}"> {{ listing.title }}</a>
+        <a href="{% url 'listings:listing_detail' listing.id %}"> {{ listing.title }}</a>
         {% if listing.listing_price %}
             ${{ listing.listing_price }}
         {% endif %}
@@ -23,8 +23,8 @@
             <br>
     </li>
     {% if matched_user %}
-        <li><a href="{% url 'listing_update' listing.id %}"> Update this listing</a></li>
-        <li><a href="{% url 'listing_delete' listing.id %}">Delete this listing</a> </li>
+        <li><a href="{% url 'listings:listing_update' listing.id %}"> Update this listing</a></li>
+        <li><a href="{% url 'listings:listing_delete' listing.id %}">Delete this listing</a> </li>
     {% endif %}
 {% endfor %}
 </ul>

@@ -43,14 +43,23 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'debug_toolbar',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # Implement at least 2 different social login options.
+    # One of them must be one not done in class.
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.instagram',
     'bootstrap3',
     'classifieds',
     'user_profiles',
     'api',
     'rest_framework_swagger',
     'corsheaders'
-
 ]
+
+SITE_ID=1
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -157,42 +166,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication')
     }
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '[%(levelname)s] %(asctime)s %(module)s %(message)s'
-#         }
-#     },
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': os.path.join(BASE_DIR, "logs/general_logs.log"),
-#             'formatter': 'verbose'
-#         },
-#         'error_file': {
-#             'level': "WARNING",
-#             'class': 'logging.FileHandler',
-#             'filename': os.path.join(BASE_DIR, "logs/error_logs.log"),
-#             'formatter': 'verbose'
-#         },
-#         'mailer': {
-#             'level': 'ERROR',
-#             'class': 'django.utils.log.AdminEmailHandler'
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'verbose'
-#         }
-#     },
-#     'loggers': {
-#         'classifieds': {
-#             'handlers': ['file', 'error_file', 'console'],
-#             'level': 'DEBUG',
-#             'propagate': True
-#         }
-#     }
-# }
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # This is the default authentication backend
+    'allauth.account.auth_backends.AuthenticationBackend',)
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>Delete Your Listing</h1>
-<form action="{% url 'listing_delete' listing.id %}" method="post">
+<form action="{% url 'classifieds:listing_delete' listing.id %}" method="post">
     {% csrf_token %}
     <p>You really want to delete this listing? You cannot undo this action. "
         {{ object }}"?</p>

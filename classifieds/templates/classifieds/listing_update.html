@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Update Your Listing</h1>
-    <form method="post" action="{% url 'listing_update' listing.id %}" enctype='multipart/form-data'>
+    <form method="post" action="{% url 'classifieds:listing_update' listing.id %}" enctype='multipart/form-data'>
         {% csrf_token %}
         {% bootstrap_form form %}
         <input type="submit" name="submit" value="update">

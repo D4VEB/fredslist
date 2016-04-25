@@ -4,6 +4,7 @@
 {% block title %}Login to your Fredslist Account{% endblock %}
 
 {% block content %}
+{% load socialaccount %}
     <h1>Fredslist Login</h1>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
@@ -11,5 +12,11 @@
         {{ form.as_p }}
         <input type="submit" name="submit" value="Log in">
     </form>
+
+<h3>Sign in with Facebook</h3>
+<a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook Login</a>
+
+<h3>Sign in with Instagram</h3>
+<a href="{% provider_login_url "instagram" method="oauth2" %}">Instagram Login</a>
 
 {% endblock %}

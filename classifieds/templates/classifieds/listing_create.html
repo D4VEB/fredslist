@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Post a listing to Fredslist</h1>
-    <form method="post" action="{% url "listing_create" %}" class="form" enctype="multipart/form-data">
+    <form method="post" action="{% url "classifieds:listing_create" %}" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons submit="Post your Listing to Fredslist" %}{% endbuttons %}
